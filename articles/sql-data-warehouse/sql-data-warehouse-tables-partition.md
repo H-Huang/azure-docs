@@ -21,7 +21,7 @@ Table partitions enable you to divide your data into smaller groups of data. In 
 Partitioning can benefit data maintenance and query performance. Whether it benefits both or just one is dependent on how data is loaded and whether the same column can be used for both purposes, since partitioning can only be done on one column.
 
 ### Benefits to loads
-The primary benefit of partitioning in SQL Data Warehouse is to improve the efficiency and performance of loading data by use of partition deletion, switching and merging. In most cases data is partitioned on a date column that is closely tied to the order in which the data is loaded into the database. One of the greatest benefits of using partitions to maintain data it the avoidance of transaction logging. While simply inserting, updating, or deleting data can be the most straightforward approach, with a little thought and effort, using partitioning during your load process can substantially improve performance.
+The primary benefit of partitioning in SQL Data Warehouse is to improve the efficiency and performance of loading data by use of partition deletion, switching and merging. In most cases data is partitioned on a date column that is closely tied to the order in which the data is loaded into the database. One of the greatest benefits of using partitions to maintain data is the avoidance of transaction logging. While simply inserting, updating, or deleting data can be the most straightforward approach, with a little thought and effort, using partitioning during your load process can substantially improve performance.
 
 Partition switching can be used to quickly remove or replace a section of a table.  For example, a sales fact table might contain just data for the past 36 months. At the end of every month, the oldest month of sales data is deleted from the table.  This data could be deleted by using a delete statement to delete the data for the oldest month. However, deleting a large amount of data row-by-row with a delete statement can take too much time, as well as create the risk of large transactions that take a long time to rollback if something goes wrong. A more optimal approach is to drop the oldest partition of data. Where deleting the individual rows could take hours, deleting an entire partition could take seconds.
 
@@ -68,7 +68,7 @@ To migrate SQL Server partition definitions to SQL Data Warehouse simply:
 - Eliminate the SQL Server [partition scheme](/sql/t-sql/statements/create-partition-scheme-transact-sql).
 - Add the [partition function](/sql/t-sql/statements/create-partition-function-transact-sql) definition to your CREATE TABLE.
 
-If you are migrating a partitioned table from a SQL Server instance, the following SQL can help you to figure out the number of rows that in each partition. Keep in mind that if the same partitioning granularity is used on SQL Data Warehouse, the number of rows per partition decreases by a factor of 60.  
+If you are migrating a partitioned table from a SQL Server instance, the following SQL can help you to figure out the number of rows in each partition. Keep in mind that if the same partitioning granularity is used on SQL Data Warehouse, the number of rows per partition decreases by a factor of 60.  
 
 ```sql
 -- Partition information for a SQL Server Database
